@@ -62,8 +62,20 @@ clopper.pearson.ci(k = 39, # k is the # of failures and/or successes (e.g., para
                    n = 100000, alpha = 0.05,
                    CI = "two.sided")
 
-# Fischer's exact test to quantify the prevalence of water mites by a predictor (e.g., landuse, host sex)
+# Fisher's exact test to quantify the prevalence of water mites by a predictor (e.g., landuse, host sex)
 
 fisher.test(water.mites.df$Landuse, water.mites.df$Mites)
 
 fisher.test(water.mites.df$Sex, water.mites.df$Mites)
+
+# Spatial autocorrelation
+
+# Generate distance matrix, then calculate the inverse of the matrix values,
+# replacing infinite values (from having multiple samples at some sites) and diagonals with zeros
+
+mites.dists <- as.matrix(dist(cbind(water.mites.df$Lon, water.mites.df$Lat)))
+water.mites.inv <- 1/mites.dists
+water.mites.inv[!is.finite(water.mites.inv)] <- 0
+diag(water.mites.inv) <- 0
+
+Moran.I(water.mites.df$Mites., water.mites.inv)
