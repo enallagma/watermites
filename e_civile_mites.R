@@ -1,12 +1,12 @@
-##############################
+#############################
 # Code for water mites data
-############################## 
+############################# 
 # 
 # Objective:
 # 
-# Analyzing the prevalence and intensity of water mites on E. civile across landcover context and host sex. 
+# Analyze the prevalence and intensity of water mites on Enallagma civile across landcover context and host sex. 
 # 
-# For landcover context, host sex, and year's sampled, subset files were generated. 
+# For landcover context, host sex, and years sampled, subset files were generated. 
 #
 # Intensity:
 # 
@@ -25,7 +25,7 @@ library(MKinfer)
 library(ape)
 
 getwd()
-water.mites.df <- read.csv("C:/yourdirectory")
+water.mites.df <- read.csv("C:/yourdirectory/e_civile_mites.csv")
 
 # Subset example:
 
