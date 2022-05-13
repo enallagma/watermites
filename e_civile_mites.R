@@ -22,8 +22,8 @@
 # We used a Clopper-Pearson confidence interval (package GenBinomApps), which takes into account 
 # the binary nature of prevalence data
 # 
-# A Fisher's exact test was used to determine any statistically significant difference between 
-# water mite prevalence and predictors.
+# A Fisher's exact test (package stats in base R) was used to determine any statistically significant difference  
+# between water mite prevalence and predictors.
 # 
 # Spatial autocorrelation:
 #
@@ -31,10 +31,10 @@
 # of mites present based on site proximity.
 #
 
-library(GenBinomApps)
-library(coxed)
-library(MKinfer)
 library(ape)
+library(coxed)
+library(GenBinomApps)
+library(MKinfer)
 
 water.mites.df <- read.csv("C:/yourdirectory/e_civile_mites.csv")
 
