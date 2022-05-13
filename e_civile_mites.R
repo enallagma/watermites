@@ -56,8 +56,8 @@ crop <- subset(water.mites.df, Landuse == "Cropland")
 
 # Water mite intensity over all sampling dates (both years):
 
-mean(water.mites.df$MitesNum) # Mean intensity of water mites on E. civile 
-sd(water.mites.df$MitesNum) # Standard deviation of water mites on E. civile
+mean(water.mites.df$MitesNum, na.rm=TRUE) # Mean intensity of water mites on E. civile 
+sd(water.mites.df$MitesNum, na.rm=TRUE) # Standard deviation of water mites on E. civile
 
 # Use mean and sd to determine the bias-corrected and accelerated bootstrap:
 
@@ -99,5 +99,5 @@ mites.dists <- as.matrix(dist(cbind(water.mites.df$Lon, water.mites.df$Lat)))
 water.mites.inv <- 1/mites.dists
 water.mites.inv[!is.finite(water.mites.inv)] <- 0
 diag(water.mites.inv) <- 0
-Moran.I(water.mites.df$MitesNum, water.mites.inv) #intensity
+Moran.I(water.mites.df$MitesNum, water.mites.inv, na.rm=TRUE) #intensity
 Moran.I(water.mites.df$MitesPres, water.mites.inv) #prevalence
