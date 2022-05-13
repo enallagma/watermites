@@ -4,7 +4,7 @@
 # 
 # Objective:
 # 
-# Analyze the prevalence and intensity of water mites on Enallagma civile across land-use context and host sex. 
+# Analyze the prevalence and intensity of water mite parasitism on Enallagma civile across land-use context and host sex. 
 # 
 # For land use, host sex, and years sampled, subset files were generated for analysis. 
 #
@@ -38,7 +38,7 @@ library(MKinfer)
 
 water.mites.df <- read.csv("C:/yourdirectory/e_civile_mites.csv")
 
-# To ignore 0's in MitesNum column (so as to calculate true intensity rather than mite abundance):
+# To ignore 0's in MitesNum column (so as to calculate true intensity of infection rather than mite abundance):
 
 is.na(water.mites.df[[10]]) <- water.mites.df[[10]] < 1
 
