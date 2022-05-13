@@ -40,9 +40,7 @@ water.mites.df <- read.csv("C:/yourdirectory/e_civile_mites.csv")
 
 # To ignore 0's in MitesNum column (so as to calculate true intensity rather than mite abundance):
 
-
-
-
+is.na(water.mites.df[[10]]) <- water.mites.df[[10]] < 1
 
 # To test for differences between years to determine if pooling is possible:
 
@@ -51,6 +49,7 @@ water.mites.df <- read.csv("C:/yourdirectory/e_civile_mites.csv")
 
 
 # Subsets:
+
 grass <- subset(water.mites.df, Landuse == "Grassland")
 crop <- subset(water.mites.df, Landuse == "Cropland")
 
