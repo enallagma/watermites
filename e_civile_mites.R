@@ -100,4 +100,4 @@ water.mites.inv <- 1/mites.dists
 water.mites.inv[!is.finite(water.mites.inv)] <- 0
 diag(water.mites.inv) <- 0
 Moran.I(water.mites.df$MitesNum, water.mites.inv, na.rm=TRUE) #intensity
-Moran.I(water.mites.df$MitesPres, water.mites.inv) #prevalence
+Moran.I(water.mites.df$MitesPres, water.mites.inv, na.rm=TRUE) #prevalence
