@@ -42,17 +42,25 @@ water.mites.df <- read.csv("C:/yourdirectory/e_civile_mites.csv")
 
 is.na(water.mites.df[[10]]) <- water.mites.df[[10]] < 1
 
-# To test for differences between years to determine if pooling is possible:
+# To determine if pooling is justified:
 
+# Fisher's exact probability test for equal proportions between years (prevalences):
+res <- prop.test(x=c(16,33), n=c(48,82))
+res
+# Conclusion: no significant difference between years
 
+# Fligner-Killeen test for homogeneity of variances between years:
+fligner.test(water.mites.df$MitesNum ~ water.mites.df$Year)
+# Conclusion: no significant difference between years
 
-
+# Therefore, pooling data for both years is acceptable.
 
 # Subsets:
 
 grass <- subset(water.mites.df, Landuse == "Grassland")
 crop <- subset(water.mites.df, Landuse == "Cropland")
-
+males <- subset(water.mites.df, Sex == "M")
+females <- subset(water.mites.df, Sex == "F")
 
 # Water mite intensity over all sampling dates (both years):
 
@@ -80,7 +88,7 @@ boot.t.test(MitesNum ~ as.factor(Sex), data = mites)
 
 length(which(water.mites.df$Mites == 1))/nrow(water.mites.df) * 100 # Prevalence of water mites on E. civile
 
-clopper.pearson.ci(k = 39, # k is the # of failures and/or successes (e.g., parasitized or not)
+clopper.pearson.ci(k = 39,  # k is the # of failures and/or successes (e.g., parasitized or not)
                    n = 100000, alpha = 0.05,
                    CI = "two.sided")
 
