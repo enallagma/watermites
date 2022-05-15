@@ -69,34 +69,17 @@ sd(water.mites.df$MitesNum, na.rm=TRUE) # Standard deviation of water mites on E
 theta <- rnorm(1000, mean, sd)
 bca(theta, conf.level = 0.95) 
 
-# Wilcox test to quantify the intensity of water mites by landuse, host sex:
-
-wilcox.test(MitesNum ~ as.factor(Landuse), data = water.mites.df, exact = TRUE)
-
-wilcox.test(MitesNum ~ as.factor(Sex), data = water.mites.df, exact = TRUE)
-
 # Bootstrapped t-test for water mite intensity by landuse, host sex:
 
-boot.t.test(MitesNum ~ as.factor(Landuse), data = intensit)
+boot.t.test(water.mites.df$MitesNum ~ as.factor(water.mites.df$Landuse))
 
-boot.t.test(MitesNum ~ as.factor(Sex), data = mites)
+boot.t.test(water.mites.df$MitesNum ~ as.factor(water.mites.df$Sex))
 
 # Water mite prevalence over all sampling dates (both years):
 
-length(which(water.mites.df$Mites == 1))/nrow(water.mites.df) * 100 # Prevalence of water mites on E. civile
+length(which(water.mites.df$MitesPres == 1))/nrow(water.mites.df) * 100 # Average prevalence of water mites on E. civile
 
-clopper.pearson.ci(k = 49,  # k is the # of failures and/or successes (parasitized or not)
-                   n = 100000, alpha = 0.05,
-                   CI = "two.sided")
-# 49 is number of parasitized damselflies in both years; 
-# there were 130 damselflies total, so there were 81 non-parasitized
-# Why not: binomCI(x = 49, n = 130, method = "clopper-pearson")
-# which is identical to: binom.test(x = 49, n = 130)$conf.int
-# see vignette for MKinfer for info
-
-
-
-
+binomCI(x = 49, n = 130, method = "clopper-pearson")
 
 # Fisher's exact test to quantify the prevalence of water mites by landuse, host sex:
 
