@@ -12,8 +12,7 @@
 # 
 # We used bias-corrected and accelerated bootstrap for confidence intervals regarding water mites (package coxed).
 # 
-# For statistical significance testing, we used a bootstrapped t-test (package MKinfer) 
-# for water mite intensity.
+# For statistical significance testing of water mite intensity, we used a bootstrapped t-test (package MKinfer). 
 # 
 # Prevalence:
 # 
