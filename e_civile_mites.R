@@ -6,15 +6,13 @@
 # 
 # Analyze the prevalence and intensity of water mite parasitism on Enallagma civile across land-use context and host sex. 
 # 
-# For land use, host sex, and years sampled, subset files were generated for analysis. 
-#
 # Intensity:
 # 
 # Non-infected individuals were not included in calculation of mean intensity.
 # 
 # We used bias-corrected and accelerated bootstrap for confidence intervals regarding water mites (package coxed).
 # 
-# For statistical significance testing, we used a Wilcox test and a bootstrapped t-test (package MKinfer) 
+# For statistical significance testing, we used a bootstrapped t-test (package MKinfer) 
 # for water mite intensity.
 # 
 # Prevalence:
@@ -23,7 +21,7 @@
 # the binary nature of prevalence data
 # 
 # A Fisher's exact test (package stats in base R) was used to determine any statistically significant difference  
-# between water mite prevalence and predictors.
+# in water mite prevalence with landuse, host sex.
 # 
 # Spatial autocorrelation:
 #
@@ -72,13 +70,13 @@ sd(water.mites.df$MitesNum, na.rm=TRUE) # Standard deviation of water mites on E
 theta <- rnorm(1000, mean, sd)
 bca(theta, conf.level = 0.95) 
 
-# Wilcox test to quantify the intensity of water mites by a predictor (e.g., landuse, host sex):
+# Wilcox test to quantify the intensity of water mites by landuse, host sex:
 
 wilcox.test(MitesNum ~ as.factor(Landuse), data = water.mites.df, exact = TRUE)
 
 wilcox.test(MitesNum ~ as.factor(Sex), data = water.mites.df, exact = TRUE)
 
-# Bootstrapped t-test for water mite intensity by a predictor (e.g., landuse, host sex):
+# Bootstrapped t-test for water mite intensity by landuse, host sex:
 
 boot.t.test(MitesNum ~ as.factor(Landuse), data = intensit)
 
@@ -88,11 +86,20 @@ boot.t.test(MitesNum ~ as.factor(Sex), data = mites)
 
 length(which(water.mites.df$Mites == 1))/nrow(water.mites.df) * 100 # Prevalence of water mites on E. civile
 
-clopper.pearson.ci(k = 39,  # k is the # of failures and/or successes (e.g., parasitized or not)
+clopper.pearson.ci(k = 49,  # k is the # of failures and/or successes (parasitized or not)
                    n = 100000, alpha = 0.05,
                    CI = "two.sided")
+# 49 is number of parasitized damselflies in both years; 
+# there were 130 damselflies total, so there were 81 non-parasitized
+# Why not: binomCI(x = 49, n = 130, method = "clopper-pearson")
+# which is identical to: binom.test(x = 49, n = 130)$conf.int
+# see vignette for MKinfer for info
 
-# Fisher's exact test to quantify the prevalence of water mites by a predictor (e.g., landuse, host sex):
+
+
+
+
+# Fisher's exact test to quantify the prevalence of water mites by landuse, host sex:
 
 fisher.test(water.mites.df$Landuse, water.mites.df$Mites)
 
