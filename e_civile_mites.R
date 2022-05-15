@@ -64,28 +64,28 @@ females <- subset(water.mites.df, Sex == "F")
 mean(water.mites.df$MitesNum, na.rm=TRUE) # Mean intensity of water mites on E. civile 
 sd(water.mites.df$MitesNum, na.rm=TRUE) # Standard deviation of water mites on E. civile
 
-# Use mean and sd to determine the bias-corrected and accelerated bootstrap:
-
-theta <- rnorm(1000, mean, sd)
-bca(theta, conf.level = 0.95) 
-
 # Bootstrapped t-test for water mite intensity by landuse, host sex:
 
 boot.t.test(water.mites.df$MitesNum ~ as.factor(water.mites.df$Landuse))
 
 boot.t.test(water.mites.df$MitesNum ~ as.factor(water.mites.df$Sex))
 
+# Use mean and sd to determine the bias-corrected and accelerated bootstrap:
+
+theta <- rnorm(1000, mean, sd)
+bca(theta, conf.level = 0.95) 
+
 # Water mite prevalence over all sampling dates (both years):
 
 length(which(water.mites.df$MitesPres == 1))/nrow(water.mites.df) * 100 # Average prevalence of water mites on E. civile
-
-binomCI(x = 49, n = 130, method = "clopper-pearson")
 
 # Fisher's exact test to quantify the prevalence of water mites by landuse, host sex:
 
 fisher.test(water.mites.df$Landuse, water.mites.df$Mites)
 
 fisher.test(water.mites.df$Sex, water.mites.df$Mites)
+
+binomCI(x = 49, n = 130, method = "clopper-pearson")
 
 # Spatial autocorrelation
 
