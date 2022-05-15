@@ -41,7 +41,8 @@ is.na(water.mites.df[[10]]) <- water.mites.df[[10]] < 1
 
 # To determine if pooling is justified:
 
-# Fisher's exact probability test for equal proportions between years (prevalences):
+# Fisher's exact probability test for equal proportions between years (prevalences), 
+# given 16/48 damselflies with mites in 2006, 33/82 in 2007:
 res <- prop.test(x=c(16,33), n=c(48,82))
 res
 # Conclusion: no significant difference between years
