@@ -90,7 +90,7 @@ mean(Yr2006$MitesPres, na.rm=TRUE)
 # Fisher's exact test to quantify the prevalence of water mites by landuse, host sex:
 fisher.test(Yr2006$Landuse, Yr2006$MitesPres)
 fisher.test(Yr2006$Sex, Yr2006$MitesPres)
-binomCI(x = 49, n = 130, method = "clopper-pearson")
+clopper.pearson.ci(16, 48, alpha=0.05)
 
 # 2007:
 
@@ -115,7 +115,7 @@ mean(Yr2006$MitesPres, na.rm=TRUE)
 # Fisher's exact test to quantify the prevalence of water mites by landuse, host sex:
 fisher.test(Yr2007$Landuse, Yr2007$MitesPres)
 fisher.test(Yr2007$Sex, Yr2007$MitesPres)
-binomCI(x = 49, n = 130, method = "clopper-pearson")
+clopper.pearson.ci(16, 82, alpha=0.05)
 
 # Years pooled:
 
@@ -140,7 +140,7 @@ mean(water.mites.df$MitesPres, na.rm=TRUE)
 # Fisher's exact test to quantify the prevalence of water mites by landuse, host sex:
 fisher.test(water.mites.df$Landuse, water.mites.df$Mites)
 fisher.test(water.mites.df$Sex, water.mites.df$Mites)
-binomCI(x = 49, n = 130, method = "clopper-pearson")
+clopper.pearson.ci(49, 130, alpha=0.05)
 
 # Spatial autocorrelation
 
