@@ -25,7 +25,8 @@
 # Spatial autocorrelation:
 #
 # We calculated Moran's I (package ape) to test the null hypothesis of no spatial autocorrelation in the number 
-# of mites present based on site proximity.
+# of mites present based on site proximity. Both years were pooled for this analysis, as most sites
+# were sampled in both years, and site locations are static.
 #
 
 library(ape)
