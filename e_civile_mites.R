@@ -52,11 +52,19 @@ fligner.test(water.mites.df$MitesNum ~ water.mites.df$Year)
 
 # Therefore, pooling data for both years is acceptable.
 
+
+#### HOWEVER, I'd like to examine everything by year because of differences in sites 
+#### and number of samples (hosts and esp mites) btw years
+
+
+
 # Subsets:
 grass <- subset(water.mites.df, Landuse == "Grassland")
 crop <- subset(water.mites.df, Landuse == "Cropland")
 males <- subset(water.mites.df, Sex == "M")
 females <- subset(water.mites.df, Sex == "F")
+Yr2006 <- subset(water.mites.df, Year == "2006")
+Yr2007 <- subset(water.mites.df, Year == "2007")
 
 # Water mite intensity over all sampling dates (both years):
 
