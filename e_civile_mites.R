@@ -67,6 +67,58 @@ females <- subset(water.mites.df, Sex == "F")
 Yr2006 <- subset(water.mites.df, Year == "2006")
 Yr2007 <- subset(water.mites.df, Year == "2007")
 
+# 2006:
+
+# Water mite intensity:
+  
+# Bootstrapped t-test for water mite intensity by landuse, host sex:
+boot.t.test(Yr2006$MitesNum ~ as.factor(Yr2006$Landuse), na.rm=TRUE)
+boot.t.test(Yr2006$MitesNum ~ as.factor(Yr2006$Sex), na.rm=TRUE)
+
+mean06 <- mean(Yr2006$MitesNum, na.rm=TRUE) # Mean intensity of water mites on E. civile 
+sd06 <- sd(Yr2006$MitesNum, na.rm=TRUE) # Standard deviation of water mites on E. civile
+
+# Use mean and sd to determine the bias-corrected and accelerated bootstrap 95% CI:
+theta06 <- rnorm(1000, mean06, sd06)
+bca(theta06, conf.level = 0.95) 
+
+# Water mite prevalence:
+
+# Average prevalence of water mites on E. civile:
+mean(Yr2006$MitesPres, na.rm=TRUE)
+
+# Fisher's exact test to quantify the prevalence of water mites by landuse, host sex:
+fisher.test(Yr2006$Landuse, Yr2006$MitesPres)
+fisher.test(Yr2006$Sex, Yr2006$MitesPres)
+binomCI(x = 49, n = 130, method = "clopper-pearson")
+
+# 2007:
+
+# Water mite intensity:
+
+# Bootstrapped t-test for water mite intensity by landuse, host sex:
+boot.t.test(Yr2007$MitesNum ~ as.factor(Yr2007$Landuse), na.rm=TRUE)
+boot.t.test(Yr2007$MitesNum ~ as.factor(Yr2007$Sex), na.rm=TRUE)
+
+mean07 <- mean(Yr2007$MitesNum, na.rm=TRUE) # Mean intensity of water mites on E. civile 
+sd07 <- sd(Yr2007$MitesNum, na.rm=TRUE) # Standard deviation of water mites on E. civile
+
+# Use mean and sd to determine the bias-corrected and accelerated bootstrap 95% CI:
+theta07 <- rnorm(1000, mean07, sd07)
+bca(theta07, conf.level = 0.95) 
+
+# Water mite prevalence:
+
+# Average prevalence of water mites on E. civile:
+mean(Yr2006$MitesPres, na.rm=TRUE)
+
+# Fisher's exact test to quantify the prevalence of water mites by landuse, host sex:
+fisher.test(Yr2007$Landuse, Yr2007$MitesPres)
+fisher.test(Yr2007$Sex, Yr2007$MitesPres)
+binomCI(x = 49, n = 130, method = "clopper-pearson")
+
+# Years pooled:
+
 # Water mite intensity over all sampling dates (both years):
 
 # Bootstrapped t-test for water mite intensity by landuse, host sex:
