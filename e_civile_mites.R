@@ -39,26 +39,6 @@ water.mites.df <- read.csv("C:/yourdirectory/e_civile_mites.csv")
 # To ignore 0's in MitesNum column (so as to calculate true intensity of infection rather than mite abundance):
 is.na(water.mites.df[[10]]) <- water.mites.df[[10]] < 1
 
-# To determine if pooling is justified:
-
-# Fisher's exact probability test for equal proportions between years (prevalences), 
-# given 16/48 damselflies with mites in 2006, 33/82 in 2007:
-res <- prop.test(x=c(16,33), n=c(48,82))
-res
-# Conclusion: no significant difference between years
-
-# Fligner-Killeen test for homogeneity of variances between years:
-fligner.test(water.mites.df$MitesNum ~ water.mites.df$Year)
-# Conclusion: no significant difference between years
-
-# Therefore, pooling data for both years is acceptable.
-
-
-#### HOWEVER, I'd like to examine everything by year because of differences in sites 
-#### and number of samples (hosts and esp mites) btw years
-
-
-
 # Subsets:
 grass <- subset(water.mites.df, Landuse == "Grassland")
 crop <- subset(water.mites.df, Landuse == "Cropland")
@@ -146,9 +126,17 @@ clopper.pearson.ci(49, 130, alpha=0.05)
 
 # Generate distance matrix, then calculate the inverse of the matrix values,
 # replacing infinite values (from having multiple samples at some sites) and diagonals with zeros:
-mites.dists <- as.matrix(dist(cbind(water.mites.df$Lon, water.mites.df$Lat)))
-water.mites.inv <- 1/mites.dists
-water.mites.inv[!is.finite(water.mites.inv)] <- 0
-diag(water.mites.inv) <- 0
-Moran.I(water.mites.df$MitesNum, water.mites.inv, na.rm=TRUE) #intensity
-Moran.I(water.mites.df$MitesPres, water.mites.inv, na.rm=TRUE) #prevalence
+# 2006:
+mites.dists.06 <- as.matrix(dist(cbind(Yr2006$Lon, Yr2006$Lat)))
+water.mites.inv.06 <- 1/mites.dists.06
+water.mites.inv.06[!is.finite(water.mites.inv.06)] <- 0
+diag(water.mites.inv.06) <- 0
+Moran.I(Yr2006$MitesNum, water.mites.inv.06, na.rm=TRUE) #intensity
+Moran.I(Yr2006$MitesPres, water.mites.inv.06, na.rm=TRUE) #prevalence
+# 2007:
+mites.dists.07 <- as.matrix(dist(cbind(Yr2007$Lon, Yr2007$Lat)))
+water.mites.inv.07 <- 1/mites.dists.07
+water.mites.inv.07[!is.finite(water.mites.inv.07)] <- 0
+diag(water.mites.inv.07) <- 0
+Moran.I(Yr2007$MitesNum, water.mites.inv.07, na.rm=TRUE) #intensity
+Moran.I(Yr2007$MitesPres, water.mites.inv.07, na.rm=TRUE) #prevalence
