@@ -6,6 +6,8 @@
 # 
 # Analyze the prevalence and intensity of water mite parasitism on Enallagma civile across land-use context and host sex. 
 # 
+# All p-values were Bonferroni-adjusted.
+#
 # Intensity:
 # 
 # Non-infected individuals were not included in calculation of mean intensity.
@@ -25,8 +27,7 @@
 # Spatial autocorrelation:
 #
 # We calculated Moran's I (package ape) to test the null hypothesis of no spatial autocorrelation in the number 
-# of mites present based on site proximity. Both years were pooled for this analysis, as most sites
-# were sampled in both years, and site locations are static.
+# of mites present based on site proximity. 
 #
 
 library(ape)
@@ -40,10 +41,6 @@ water.mites.df <- read.csv("C:/yourdirectory/e_civile_mites.csv")
 is.na(water.mites.df[[10]]) <- water.mites.df[[10]] < 1
 
 # Subsets:
-grass <- subset(water.mites.df, Landuse == "Grassland")
-crop <- subset(water.mites.df, Landuse == "Cropland")
-males <- subset(water.mites.df, Sex == "M")
-females <- subset(water.mites.df, Sex == "F")
 Yr2006 <- subset(water.mites.df, Year == "2006")
 Yr2007 <- subset(water.mites.df, Year == "2007")
 
@@ -126,6 +123,7 @@ clopper.pearson.ci(49, 130, alpha=0.05)
 
 # Generate distance matrix, then calculate the inverse of the matrix values,
 # replacing infinite values (from having multiple samples at some sites) and diagonals with zeros:
+#
 # 2006:
 mites.dists.06 <- as.matrix(dist(cbind(Yr2006$Lon, Yr2006$Lat)))
 water.mites.inv.06 <- 1/mites.dists.06
@@ -133,6 +131,7 @@ water.mites.inv.06[!is.finite(water.mites.inv.06)] <- 0
 diag(water.mites.inv.06) <- 0
 Moran.I(Yr2006$MitesNum, water.mites.inv.06, na.rm=TRUE) #intensity
 Moran.I(Yr2006$MitesPres, water.mites.inv.06, na.rm=TRUE) #prevalence
+#
 # 2007:
 mites.dists.07 <- as.matrix(dist(cbind(Yr2007$Lon, Yr2007$Lat)))
 water.mites.inv.07 <- 1/mites.dists.07
@@ -140,3 +139,4 @@ water.mites.inv.07[!is.finite(water.mites.inv.07)] <- 0
 diag(water.mites.inv.07) <- 0
 Moran.I(Yr2007$MitesNum, water.mites.inv.07, na.rm=TRUE) #intensity
 Moran.I(Yr2007$MitesPres, water.mites.inv.07, na.rm=TRUE) #prevalence
+#
