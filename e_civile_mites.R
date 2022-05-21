@@ -13,6 +13,7 @@
 # Non-infected individuals were not included in calculation of mean intensity.
 # 
 # For statistical significance testing of water mite intensity, we used a bootstrapped t-test (package MKinfer). 
+# Because this is a bootstrapped test, the p-value will vary every time the test is run.
 # 
 # We used bias-corrected and accelerated bootstrap for confidence intervals of mean intensity (package coxed).
 # 
