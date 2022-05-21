@@ -161,9 +161,6 @@ bca(theta, conf.level = 0.95)
 
 # Water mite prevalence over all sampling dates (both years):
 
-# Average prevalence of water mites on E. civile:
-mean(water.mites.df$MitesPres, na.rm=TRUE)
-
 # Fisher's exact test to quantify the prevalence of water mites by landuse, host sex:
 fisher.test(water.mites.df$Landuse, water.mites.df$Mites)
 fisher.test(water.mites.df$Sex, water.mites.df$Mites)
